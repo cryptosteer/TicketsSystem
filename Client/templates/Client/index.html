@@ -1,0 +1,116 @@
+{% extends "Client/base.html" %}
+
+{% block menu %}
+                        <li>
+                            <a href="#" onclick="show_section('1')"><i class="fa fa-star fa-fw"></i> Create new request</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="show_section('2')"><i class="fa fa-list fa-fw"></i> Requests list</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="show_section('3')"><i class="fa fa-user fa-fw"></i> User settings</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="show_section('4')"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+{% endblock %}
+
+{% block portal %}Customer Support{% endblock %}
+
+{% block content %}
+            <div id="section-1">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Create new request</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Result</h4>
+                                <div id="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section-2">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Requests list</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Result</h4>
+                                <div id="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section-3">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">User settings</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Result</h4>
+                                <div id="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Logout</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Result</h4>
+                                <div id="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+{% block extraJS %}
+<script type="text/javascript">
+    $(function() {
+        $("[id^=section]").hide();
+        $("#section-1").show();
+        $.ajax({
+            url: "http://localhost:8000/api/series/"
+        }).then(function(data) {
+            console.log(JSON.stringify(data));
+            $('#result').html(data[0].name);
+        }).fail(function() {
+            $('#result').html("Error");
+            alert(2);
+        });
+    });
+
+    function show_section(section) {
+        $("[id^=section]").hide();
+        $("#section-"+section).show();
+    }
+</script>
+{% endblock %}

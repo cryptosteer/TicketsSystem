@@ -53,9 +53,9 @@ function save_user(){
             Authorization: 'Token '+token
         },
         data: {
-          first_name: $("#id_first_name").val(data.first_name),
-          last_name: $("#id_last_name").val(data.last_name),
-          email: $("#id_email").val(data.email)
+          first_name: $("#id_first_name").val(),
+          last_name: $("#id_last_name").val(),
+          email: $("#id_email").val()
         }
     }).done(function( data ) {
       show_section('1');

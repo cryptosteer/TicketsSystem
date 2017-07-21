@@ -37,6 +37,7 @@ class TicketItemSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     order = serializers.CharField(required=False, allow_blank=True, max_length=100)
     created = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    closed = serializers.CharField(required=False, allow_blank=True, max_length=100)
     created_by = serializers.CharField(required=False, allow_blank=True, max_length=100)
     priority = serializers.CharField(required=False, allow_blank=True, max_length=100)
     problem = serializers.CharField(required=False, allow_blank=True, max_length=100)

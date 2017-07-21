@@ -1,34 +1,3 @@
-var token = '';
-
-$(function() {
-  $('#loginModal').modal();
-});
-
-function login() {
-    $.ajax({
-        type: "POST",
-        url: "/api/get_auth_token/",
-        data: {
-          username:$("#id_username").val(),
-          password:$("#id_password").val()
-        }
-    }).done(function( data ) {
-        if (data.token != '') {
-          token = data.token;
-          $('#loginModal').modal('hide');
-          load();
-        }
-    }).fail(function() {
-         alert("Error");
-    });
-}
-
-function logout() {
-  token = '';
-  $("[id^=section]").hide();
-  $('#loginModal').modal();
-}
-
 function load(){
     $("#section-1").show();
     $('#main-table').DataTable( {
@@ -108,13 +77,6 @@ function load(){
     });
 
 }
-function show_section(section) {
-    $("[id^=section]").hide();
-    $("#section-"+section).show();
-    if (section==1) {
-        $('#main-table').DataTable().ajax.reload();
-    }
-}
 
 function create_ticket(){
     $.ajax({
@@ -150,6 +112,7 @@ function get_ticket(id){
         $("#ticket_id").val(data.id);
         $("#ticket_answer").val('');
         $("#ticket_created_date").html(data.created);
+        $("#ticket_closed_date").html(data.closed);
         $("#ticket_order_number").html(data.order);
         $("#ticket_created_by").html(data.created_by);
         $("#ticket_priority").html(data.priority);
@@ -174,7 +137,7 @@ function reply_ticket() {
         url: "/api/reply_ticket/",
         data:{
           id:$('#ticket_id').val(),
-          reply:$('#ticket_reply').val()
+          reply:$('#ticket_answer').val()
         },
         headers: {
             Authorization: 'Token '+token

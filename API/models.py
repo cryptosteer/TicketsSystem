@@ -76,10 +76,11 @@ class Ticket(models.Model):
 
 class TicketItem():
 
-    def __init__(self, id, order, created, created_by, priority, problem, description, status, agent):
+    def __init__(self, id, order, created, closed, created_by, priority, problem, description, status, agent):
         self.id = id
         self.order = order
         self.created = created
+        self.closed = closed
         self.created_by = created_by
         self.priority = priority
         self.problem = problem

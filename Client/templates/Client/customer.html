@@ -140,6 +140,7 @@
                             <div class="col-lg-4">  
                                 <div class="ticket_field"><strong>Created: </strong><span id="ticket_created_date"></span></div>
                                 <div class="ticket_field"><strong>Order No: </strong><span id="ticket_order_number"></span></div>
+                                <div class="ticket_field"><strong>Closed: </strong><span id="ticket_closed_date"></span></div>
                             </div>
                             <div class="col-lg-4">  
                                 <div class="ticket_field"><strong>Customer: </strong><span id="ticket_created_by"></span></div>
@@ -167,9 +168,9 @@
                                 <form action="{{ request.path }}" method="post" id="form-answerrequest" role="form">
                                     <div class="form-body">
                                         <div class="form-group">
-                                            <label for="id_description">Reply</label>
                                             <input type="hidden" id="ticket_id" name="id" value="">
-                                            <textarea class="form-control" cols="40" id="ticket_reply" name="answer" placeholder="Reply" rows="10"></textarea>
+                                            <label for="ticket_answer">Reply</label>
+                                            <textarea class="form-control" cols="40" id="ticket_answer" name="answer" placeholder="Reply" rows="10"></textarea>
                                         </div>
                                         <a href="javascript:void(0)" onclick="reply_ticket()" class="btn btn-primary">Reply</a>
                                         <a href="javascript:void(0)" onclick="close_ticket()" class="btn btn-success">Close ticket</a>

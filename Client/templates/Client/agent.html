@@ -93,18 +93,18 @@
                         <form action="{{ request.path }}" method="post" id="form-updateuser" role="form">
                             <div class="form-body">
                                 <div class="form-group">
-                                    <label for="id_name">Full name</label>
-                                    <input class="form-control" id="id_name" maxlength="100" name="name" placeholder="Full name" type="text" required="">
+                                    <label for="id_name">First name</label>
+                                    <input class="form-control" id="id_first_name" maxlength="100" name="name" placeholder="First name" type="text" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_name">Last name</label>
+                                    <input class="form-control" id="id_last_name" maxlength="100" name="name" placeholder="Last name" type="text" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="id_email">E-mail</label>
                                     <input class="form-control" id="id_email" maxlength="100" name="email" placeholder="E-mail" type="text" required="">
                                 </div>
-                                <div class="form-group">
-                                    <label for="id_phone">Phone number</label>
-                                    <input class="form-control" id="id_phone" maxlength="100" name="phone" placeholder="Phone number" type="text" required="">
-                                </div>
-                                <a href="javascript:void(0)" onclick="" class="btn btn-primary">Update</a>
+                                <a href="javascript:void(0)" onclick="save_user()" class="btn btn-primary">Update</a>
                             </div>
                         </form>
                     </div>

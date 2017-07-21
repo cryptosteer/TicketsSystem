@@ -166,3 +166,20 @@ function close_ticket() {
          alert("Error");
     });
 }
+
+function show_section(section) {
+    $("[id^=section]").hide();
+    $("#section-"+section).show();
+    if (section==1) {
+        $('#main-table').DataTable().ajax.reload();
+    }
+    if (section==2) {
+        $('#id_order_number').val('');
+        $('#id_priority').val(0);
+        $('#id_problem').val(0);
+        $('#id_description').val('');
+    }
+    if (section==3) {
+        load_user();
+    }
+}

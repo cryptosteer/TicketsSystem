@@ -1,23 +1,31 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Ticket, TicketPriority, TicketProblem
 
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+
 class TicketSerializer(serializers.ModelSerializer):
-    """docstring for TicketSerializer"""
+
     class Meta:
         model = Ticket
         fields = '__all__'
 
 
 class TicketPrioritySerializer(serializers.ModelSerializer):
-    """docstring for TicketPrioritySerializer"""
+
     class Meta:
         model = TicketPriority
         fields = '__all__'
 
 
 class TicketProblemSerializer(serializers.ModelSerializer):
-    """docstring for TicketProblemSerializer"""
+
     class Meta:
         model = TicketProblem
         fields = '__all__'

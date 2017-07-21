@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from .views import TicketViewSet, TicketPriorityViewSet, TicketProblemViewSet,\
     ticket_list, ticket_create, get_ticket, answer_ticket, reply_ticket,\
-    close_ticket, closed_ticket_list, pending_ticket_list
+    close_ticket, closed_ticket_list, pending_ticket_list, load_user, save_user
 from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
@@ -18,5 +18,7 @@ urlpatterns = [
     url(r'^answer_ticket/$', answer_ticket, name='answer_ticket'),
     url(r'^reply_ticket/$', reply_ticket, name='reply_ticket'),
     url(r'^close_ticket/$', close_ticket, name='close_ticket'),
+    url(r'^load_user/$', load_user, name='load_user'),
+    url(r'^save_user/$', save_user, name='save_user'),
     url(r'^', include(router.urls)),
 ]

@@ -188,3 +188,17 @@ function close_ticket() {
          alert("Error");
     });
 }
+
+function show_section(section) {
+    $("[id^=section]").hide();
+    $("#section-"+section).show();
+    if (section==1) {
+        $('#main-table').DataTable().ajax.reload();
+    }
+    if (section==2) {
+        $('#closed-table').DataTable().ajax.reload();
+    }
+    if (section==3) {
+        load_user();
+    }
+}

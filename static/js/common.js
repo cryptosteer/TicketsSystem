@@ -29,13 +29,38 @@ function logout() {
   $('#loginModal').modal();
 }
 
-function show_section(section) {
-    $("[id^=section]").hide();
-    $("#section-"+section).show();
-    if (section==1) {
-        $('#main-table').DataTable().ajax.reload();
-    }
-    if (section==2) {
-        $('#closed-table').DataTable().ajax.reload();
-    }
+function load_user(){
+    $.ajax({
+        type: "POST",
+        url: "/api/load_user/",
+        headers: {
+            Authorization: 'Token '+token
+        }
+    }).done(function( data ) {
+        $("#id_first_name").val(data.first_name);
+        $("#id_last_name").val(data.last_name);
+        $("#id_email").val(data.email);
+    }).fail(function() {
+         alert("Error");
+    });
 }
+
+function save_user(){
+    $.ajax({
+        type: "POST",
+        url: "/api/save_user/",
+        headers: {
+            Authorization: 'Token '+token
+        },
+        data: {
+          first_name: $("#id_first_name").val(data.first_name),
+          last_name: $("#id_last_name").val(data.last_name),
+          email: $("#id_email").val(data.email)
+        }
+    }).done(function( data ) {
+      show_section('1');
+    }).fail(function() {
+         alert("Error");
+    });
+}
+

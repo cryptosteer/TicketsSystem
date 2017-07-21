@@ -61,7 +61,6 @@
                             <div class="panel-body">
                                 <form action="{{ request.path }}" method="post" id="form-newrequest" role="form">
                                     <div class="form-body">
-                                        {% csrf_token %}
                                         <div class="form-group">
                                             <label for="id_order_number">Order reference No</label>
                                             <input class="form-control" id="id_order_number" maxlength="100" name="order_number" placeholder="Order number" type="text" required="">
@@ -103,7 +102,6 @@
                             <div class="panel-body">
                                 <form action="{{ request.path }}" method="post" id="form-updateuser" role="form">
                                     <div class="form-body">
-                                        {% csrf_token %}
                                         <div class="form-group">
                                             <label for="id_name">Full name</label>
                                             <input class="form-control" id="id_name" maxlength="100" name="name" placeholder="Full name" type="text" required="">
@@ -166,7 +164,6 @@
                                         <hr>
                                         <form action="{{ request.path }}" method="post" id="form-answerrequest" role="form">
                                             <div class="form-body">
-                                                {% csrf_token %}
                                                 <div class="form-group">
                                                     <label for="id_description">Answer</label>
                                                     <input type="hidden" id="ticket_id" name="id" value="">

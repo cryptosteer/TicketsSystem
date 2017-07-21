@@ -50,6 +50,8 @@ def ticket_list(request):
                 item.problem.name, '', item.status.name, item.assigned_to))
         serializer = TicketListSerializer(data, many=True)
         return JSONResponse(serializer.data)
+    else:
+        return HttpResponse('Ok')
 
 
 @csrf_exempt

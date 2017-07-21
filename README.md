@@ -1,4 +1,4 @@
-# Test Tickets System
+# Test - Tickets System
 
 This is a ticket system. Customers place support tickets and support agents can process, respond and solve those tickets.
 
@@ -6,23 +6,23 @@ This is a ticket system. Customers place support tickets and support agents can 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Those steps are done in ubuntu 14.04, you have to adapt it to your OS.
+This steps were done in ubuntu 14.04, you have to adapt it to your OS.
 
 ### Prerequisites
 
-python3.x
-python-pip
-virtualenv
+* python3.x
+* python-pip
+* virtualenv
 
 ### Installing
 
-Creating new enviroment
+Creating new enviroment.
 
 ```
 virtualenv ~/env/tickets
 ```
 
-Installing packages
+Installing packages from project root folder /TicketSystem.
 
 ```
 source ~/env/tickets/bin/activate
@@ -31,27 +31,27 @@ pip install -r requirements.txt
 
 ## Using the application
 
-To start the server run this command from project root folder /TicketSystem
+To start the server run this command from project root folder /TicketSystem.
 
 ```
 python manage.py runserver
 ```
 
-First access to a custormer portal, and create tickets
+First, access to the customer portal, and create tickets.
 
 http://localhost:8000/
 user: customer1 or customer2
 pass: pass1234
 
-Then access to a support agent portal, and answer some tickets
+Then, enter to the support agent portal, and answer some tickets.
 
 http://localhost:8000/agent/
 user: agent1 or agent2
 pass: pass1234
 
-You can continue replying as a customer or answering as agent, until one of then decides to close the ticket
+You can continue replying as a customer or answering as agent, until one of then decides to close the tickets.
 
-Finally you can access to the administration backend to manage user and some information
+Finally you can access to the administration backend to manage user and some information.
 
 http://localhost:8000/admin/
 user: admin

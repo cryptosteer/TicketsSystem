@@ -19,14 +19,14 @@ virtualenv
 Creating new enviroment
 
 ```
-sudo virtualenv -p /opt/env_test_tickets
+virtualenv ~/env/tickets
 ```
 
 Installing packages
 
 ```
-source /opt/env_test_tickets/bin/activate
-sudo pip install -r requirements.txt
+source ~/env/tickets/bin/activate
+pip install -r requirements.txt
 ```
 
 ## Using the application

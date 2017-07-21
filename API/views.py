@@ -75,8 +75,8 @@ def pending_ticket_list(request):
 def closed_ticket_list(request):
     data = []
     closed_status = TicketStatus.objects.get(value="closed")
-    filterargs = {'status': closed_status}
-    queryset = Ticket.objects.filter(**filterargs)
+    limit_date = datetime.datetime.now() - datetime.timedelta(days=30)
+    queryset = Ticket.objects.filter(Q(status=closed_status) & Q(closed_date__gte=limit_date))
     for item in queryset:
         data.append(TicketItem(
             item.id, item.order_number, naturalday(item.created_date), '', '', item.priority.name,

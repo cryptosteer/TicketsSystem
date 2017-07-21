@@ -1,14 +1,43 @@
-var token = 'a7fa56bf3402eced502c7a50158da8c97efecdd3';
+var token = '';
 
 $(function() {
+  $('#loginModal').modal();
+});
+
+function login() {
+    $.ajax({
+        type: "POST",
+        url: "/api/get_auth_token/",
+        data: {
+          username:$("#id_username").val(),
+          password:$("#id_password").val()
+        }
+    }).done(function( data ) {
+        if (data.token != '') {
+          token = data.token;
+          $('#loginModal').modal('hide');
+          load();
+        }
+    }).fail(function() {
+         alert("Error");
+    });
+}
+
+function logout() {
+  token = '';
+  $("[id^=section]").hide();
+  $('#loginModal').modal();
+}
+
+function load(){
     $("#section-1").show();
     $('#main-table').DataTable( {
       "ajax": {
           url: "/api/ticket_list/",
+          type: "POST",
           headers: {
               Authorization:"Token "+token
           },
-          type: "POST",
           data: function ( d ) {
               return $.extend( {}, d, {
                   // date: $("select[id='flt-date']").val(),
@@ -30,6 +59,7 @@ $(function() {
           { "data": "status"},
           { "data": "agent"},
       ],
+      destroy:true,
       paging:false,
       "ordering": false,
       columnDefs: [
@@ -45,7 +75,7 @@ $(function() {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8000/api/ticket_priorities/",
+        url: "/api/ticket_priorities/",
         headers: {
             Authorization: 'Token '+token
         }
@@ -62,7 +92,7 @@ $(function() {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8000/api/ticket_problems/",
+        url: "/api/ticket_problems/",
         headers: {
             Authorization: 'Token '+token
         }
@@ -76,8 +106,8 @@ $(function() {
     }).fail(function() {
          alert("Error");
     });
-});
 
+}
 function show_section(section) {
     $("[id^=section]").hide();
     $("#section-"+section).show();
@@ -89,7 +119,7 @@ function show_section(section) {
 function create_ticket(){
     $.ajax({
         type: "POST",
-        url: "http://localhost:8000/api/ticket_create/",
+        url: "/api/ticket_create/",
         data:{
           order_number:$('#id_order_number').val(),
           priority:$('#id_priority').val(),
@@ -107,13 +137,69 @@ function create_ticket(){
 }
 
 function get_ticket(id){
-
+   $.ajax({
+        type: "POST",
+        url: "/api/get_ticket/",
+        data:{
+          id:id
+        },
+        headers: {
+            Authorization: 'Token '+token
+        }
+    }).done(function( data ) {
+        $("#ticket_id").val(data.id);
+        $("#ticket_answer").val('');
+        $("#ticket_created_date").html(data.created);
+        $("#ticket_order_number").html(data.order);
+        $("#ticket_created_by").html(data.created_by);
+        $("#ticket_priority").html(data.priority);
+        $("#ticket_problem").html(data.problem);
+        $("#ticket_description").html(data.description);
+        $("#ticket_status").html(data.status);
+        $("#ticket_assigned_to").html(data.agent);
+        if (data.status=="Answered") {
+          $("#answer-box").show();
+        } else {
+          $("#answer-box").hide();
+        }
+        show_section(4);
+    }).fail(function() {
+         alert("Error");
+    });
 }
 
-function answer_ticket() {
-    // body...
+function reply_ticket() {
+   $.ajax({
+        type: "POST",
+        url: "/api/reply_ticket/",
+        data:{
+          id:$('#ticket_id').val(),
+          reply:$('#ticket_reply').val()
+        },
+        headers: {
+            Authorization: 'Token '+token
+        }
+    }).done(function( data ) {
+      get_ticket($('#ticket_id').val());
+    }).fail(function() {
+         alert("Error");
+    });
 }
 
 function close_ticket() {
-    // body...
+   $.ajax({
+        type: "POST",
+        url: "/api/close_ticket/",
+        data:{
+          id:$('#ticket_id').val(),
+          answer:$('#ticket_answer').val()
+        },
+        headers: {
+            Authorization: 'Token '+token
+        }
+    }).done(function( data ) {
+      get_ticket($('#ticket_id').val());
+    }).fail(function() {
+         alert("Error");
+    });
 }

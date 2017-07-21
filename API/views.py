@@ -80,10 +80,30 @@ def get_ticket(request):
 
 
 @csrf_exempt
+def reply_ticket(request):
+    if request.method == 'POST':
+        ticket = Ticket.objects.get(pk=request.POST['id'])
+        ticket.description += '\n\n' + '--REPLY--' + '\n\n' + request.POST['reply']
+        ticket.status = TicketStatus.objects.get(value='clientreply')
+        ticket.save()
+        return HttpResponse('Ok')
+
+
+@csrf_exempt
 def answer_ticket(request):
     if request.method == 'POST':
         ticket = Ticket.objects.get(pk=request.POST['id'])
-        ticket.description += '\n\n' + '--Respuesta--' + '\n\n' + request.POST['answer']
+        ticket.description += '\n\n' + '--ANSWER--' + '\n\n' + request.POST['answer']
         ticket.status = TicketStatus.objects.get(value='answered')
+        ticket.save()
+        return HttpResponse('Ok')
+
+
+@csrf_exempt
+def close_ticket(request):
+    if request.method == 'POST':
+        ticket = Ticket.objects.get(pk=request.POST['id'])
+        ticket.description += '\n\n' + '--CLOSED--' + '\n\n' + request.POST['answer']
+        ticket.status = TicketStatus.objects.get(value='closed')
         ticket.save()
         return HttpResponse('Ok')

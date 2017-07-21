@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Frontend - Consuming API</title>
+    <title>Tickets System - {% block title %}{% endblock %}</title>
 
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
@@ -31,8 +31,6 @@
 <body>
 
     <div id="wrapper">
-
-        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,7 +41,6 @@
                 </button>
                 <a class="navbar-brand">{% block portal %}Customer Support{% endblock %}</a>
             </div>
-            <!-- /.navbar-header -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -52,28 +49,44 @@
                     </ul>
                 </div>
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
 
-        <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 {% block content %}
                 {% endblock %}
             </div>
-            <!-- /.container-fluid -->
         </div>
-        <!-- /#page-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">User Login</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <input class="form-control" id="id_username" maxlength="254" name="username" type="text" required="" autofocus>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" id="id_password" name="password" type="password" required="" autocomplete="off" placeholder="Password">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" onclick="login()" class="btn btn-primary">Login</button>
+              </div>
+            </div>
+        </div>
+    </div>
 
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor/datatables/datatables.min.js' %}"></script>
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
 
     {% block extraJS %}
     {% endblock %}    

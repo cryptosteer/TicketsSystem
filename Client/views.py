@@ -3,7 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 
-@login_required
-def index(request):
+def customer(request):
     context = {}
-    return render(request, 'Client/index.html', context)
+    return render(request, 'Client/customer.html', context)
+
+
+def agent(request):
+    context = {}
+    return render(request, 'Client/agent.html', context)
